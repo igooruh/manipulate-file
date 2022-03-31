@@ -24,7 +24,11 @@ class Database {
     }
 
     async list(id) {
-        
+        const data = await this.getDataFile()
+
+        const dataFilter = data.filter(item => (id ? (item.id === id) : true))
+
+        return dataFilter
     }
 }
 
