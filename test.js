@@ -16,6 +16,6 @@ describe('Suite of manipilation of heros', () => {
         // Destruct return first position
         const [result] = await database.list(expected.id)
 
-        ok(result, expected)
+        deepEqual(result, expected)
     })
 })
