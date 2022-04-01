@@ -10,6 +10,10 @@ const DEFAULT_ITEM_REGISTER = {
 
 describe('Suite of manipilation of heros', () => {
 
+    before(async () => {
+        await database.register(DEFAULT_ITEM_REGISTER)
+    })
+
     it('should search a hero, using file', async () => {
         const expected = DEFAULT_ITEM_REGISTER
 
