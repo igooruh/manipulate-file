@@ -18,4 +18,14 @@ describe('Suite of manipilation of heros', () => {
 
         deepEqual(result, expected)
     })
+
+    it('should register a hero using file', async () => {
+        const expected = DEFAULT_ITEM_REGISTER
+
+        const resultRegister = await database.register(DEFAULT_ITEM_REGISTER)
+
+        const [actual] = await database.list(DEFAULT_ITEM_REGISTER.id)
+
+        deepEqual(actual, expected)
+    })
 })
