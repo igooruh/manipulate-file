@@ -1,4 +1,7 @@
-const { readFile } = require('fs')
+const {
+    readFile,
+    writeFile
+} = require('fs')
 const { promisify } = require('util')
 
 /**
@@ -6,6 +9,7 @@ const { promisify } = require('util')
  * const readFileAsync = require('./heros.json')
  */
 const readFileAsync = promisify(readFile)
+const writeFileAsync = promisify(writeFile)
 
 class Database {
 
@@ -19,8 +23,28 @@ class Database {
         return JSON.parse(file.toString())
     }
 
-    writeDataFile() {
+    async writeDataFile(data) {
+        await writeFileAsync(this.FILE_NAME, JSON.stringify(data))
 
+        return true
+    }
+
+    async register(hero) {
+        const data = await this.getDataFile()
+
+        const id = hero.id <= 2 ? hero.id : Date.now()
+
+        const heroWithId = {
+            id,
+            nome: 'Batman',
+            power: 'Not Had'
+        }
+
+        const dataFinal = [ ...data, heroWithId ]
+
+        const result = await this.writeDataFile(dataFinal)
+
+        return result
     }
 
     async list(id) {
