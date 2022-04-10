@@ -47,6 +47,22 @@ class Database {
         return result
     }
 
+    async remove(id) {
+        if(!id) {
+            return await this.writeDataFile([])
+        }
+
+        const data = await this.getDataFile()
+
+        const index = data.findIndex(item => item.id === parseInt(id))
+
+        if(index === -1) throw Error('User not found')
+
+        data.splice(index, 1)
+
+        return await this.writeDataFile(data)
+    }
+
     async list(id) {
         const data = await this.getDataFile()
 
