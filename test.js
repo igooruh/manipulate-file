@@ -32,4 +32,12 @@ describe('Suite of manipilation of heros', () => {
 
         deepEqual(actual, expected)
     })
+
+    it('should remove a hero', async () => {
+        const expected = true
+
+        const result = await database.remove(DEFAULT_ITEM_REGISTER.id)
+
+        deepEqual(result, expected)
+    })
 })
